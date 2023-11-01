@@ -1,10 +1,15 @@
 ﻿// Copyright (c) Ben A Adams. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Ben.Demystifier;
 
 namespace System.Diagnostics
 {
+#if NET6_0_OR_GREATER
+    [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
     public class EnhancedStackFrame : StackFrame
     {
         private readonly string? _fileName;
