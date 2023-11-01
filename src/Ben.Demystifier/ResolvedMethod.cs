@@ -12,7 +12,7 @@ namespace System.Diagnostics
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
 #endif
-    public class ResolvedMethod
+    internal class ResolvedMethod
     {
         public MethodBase? MethodBase { get; set; }
 
