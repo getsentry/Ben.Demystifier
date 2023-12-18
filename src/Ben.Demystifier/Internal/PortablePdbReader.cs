@@ -78,18 +78,20 @@ namespace System.Diagnostics.Internal
 
         private MetadataReader? GetMetadataReader(string assemblyPath)
         {
-            if (!_cache.TryGetValue(assemblyPath, out var provider) && provider is not null)
+            if (_cache.TryGetValue(assemblyPath, out var provider))
             {
-                var pdbPath = GetPdbPath(assemblyPath);
-
-                if (!string.IsNullOrEmpty(pdbPath) && File.Exists(pdbPath) && IsPortable(pdbPath!))
-                {
-                    var pdbStream = File.OpenRead(pdbPath);
-                    provider = MetadataReaderProvider.FromPortablePdbStream(pdbStream);
-                }
-
-                _cache[assemblyPath] = provider;
+                return provider?.GetMetadataReader();
             }
+
+            var pdbPath = GetPdbPath(assemblyPath);
+
+            if (!string.IsNullOrEmpty(pdbPath) && File.Exists(pdbPath) && IsPortable(pdbPath!))
+            {
+                var pdbStream = File.OpenRead(pdbPath);
+                provider = MetadataReaderProvider.FromPortablePdbStream(pdbStream);
+            }
+
+            _cache[assemblyPath] = provider!;
 
             return provider?.GetMetadataReader();
         }
