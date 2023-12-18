@@ -43,9 +43,10 @@ namespace System.Diagnostics.Internal
             }
 
             var methodToken = MetadataTokens.Handle(method.MetadataToken);
-
-            Debug.Assert(methodToken.Kind == HandleKind.MethodDefinition);
-
+            if (methodToken.Kind != HandleKind.MethodDefinition)
+            {
+                return;
+            }
             var handle = ((MethodDefinitionHandle)methodToken).ToDebugInformationHandle();
 
             if (!handle.IsNil)
