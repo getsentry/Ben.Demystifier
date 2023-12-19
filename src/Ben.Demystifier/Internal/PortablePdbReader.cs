@@ -43,6 +43,7 @@ namespace System.Diagnostics.Internal
             }
 
             var methodToken = MetadataTokens.Handle(method.MetadataToken);
+            // Sometimes we get a HandleKind.ModuleDefinition. We simply don't populate those stack frames.
             if (methodToken.Kind != HandleKind.MethodDefinition)
             {
                 return;
