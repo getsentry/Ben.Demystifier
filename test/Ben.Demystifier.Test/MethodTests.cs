@@ -77,11 +77,18 @@ namespace Ben.Demystifier.Test
             stackTrace = LineEndingsHelper.RemoveLineEndings(stackTrace);
             var trace = string.Join(string.Empty, stackTrace.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries));
 
+#if (NETFRAMEWORK && !DEBUG)
+            var expected = string.Join(string.Empty,
+                "System.ArgumentException: Value does not fall within the expected range.",
+                "   at void Ben.Demystifier.Test.MethodTests.MethodWithLambda()+() => { }",
+                "   at void Ben.Demystifier.Test.MethodTests.DemistifiesMethodWithLambda()");
+#else
             var expected = string.Join(string.Empty,
                 "System.ArgumentException: Value does not fall within the expected range.",
                 "   at void Ben.Demystifier.Test.MethodTests.MethodWithLambda()+() => { }",
                 "   at void Ben.Demystifier.Test.MethodTests.MethodWithLambda()",
                 "   at void Ben.Demystifier.Test.MethodTests.DemistifiesMethodWithLambda()");
+#endif            
 
             Assert.Equal(expected, trace);
         }
