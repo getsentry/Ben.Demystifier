@@ -196,7 +196,7 @@ namespace System.Diagnostics
                                 var value = field.GetValue(field);
                                 if (value is Delegate d && d.Target is not null)
                                 {
-                                    if (ReferenceEquals(d.Method, originMethod) &&
+                                    if (d.Method == originMethod &&
                                         d.Target.ToString() == originMethod.DeclaringType?.ToString())
                                     {
                                         methodDisplayInfo.Name = field.Name;
@@ -391,7 +391,16 @@ namespace System.Diagnostics
             ordinal = null;
             foreach (var candidateMethod in candidateMethods)
             {
-                if (candidateMethod.GetMethodBody() is not { } methodBody)
+                MethodBody? methodBody = null;
+                try
+                {
+                    methodBody = candidateMethod.GetMethodBody();
+                }
+                catch
+                {
+                    // Platforms like native AOT don't provide access to IL method bodies
+                }
+                if (methodBody == null)
                 {
                     continue;
                 }
@@ -610,9 +619,15 @@ namespace System.Diagnostics
             {
                 var customAttribs = parameter.GetCustomAttributes(inherit: false);
 
+#if NET45
                 var tupleNameAttribute = customAttribs.OfType<Attribute>().FirstOrDefault(a => a.IsTupleElementNameAttribute());
 
                 var tupleNames = tupleNameAttribute?.GetTransformerNames();
+#else
+                var tupleNameAttribute = customAttribs.OfType<TupleElementNamesAttribute>().FirstOrDefault();
+
+                var tupleNames = tupleNameAttribute?.TransformNames;
+#endif
 
                 if (tupleNames?.Count > 0)
                 {
@@ -633,7 +648,7 @@ namespace System.Diagnostics
             };
         }
 
-        private static ResolvedParameter GetValueTupleParameter(IList<string> tupleNames, string prefix, string? name, Type parameterType)
+        private static ResolvedParameter GetValueTupleParameter(IList<string?> tupleNames, string prefix, string? name, Type parameterType)
         {
             return new ValueTupleResolvedParameter(parameterType, tupleNames)
             {
