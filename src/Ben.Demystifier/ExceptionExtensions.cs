@@ -10,7 +10,7 @@ using Ben.Demystifier;
 
 namespace System.Diagnostics
 {
-    internal static class ExceptionExtensions
+    public static class ExceptionExtensions
     {
         private static readonly FieldInfo? stackTraceString = typeof(Exception).GetField("_stackTraceString", BindingFlags.Instance | BindingFlags.NonPublic);
 
