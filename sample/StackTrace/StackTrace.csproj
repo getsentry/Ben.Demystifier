@@ -9,4 +9,8 @@
     <ProjectReference Include="..\..\src\Ben.Demystifier\Ben.Demystifier.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.1.30" />
+  </ItemGroup>
+
 </Project>

@@ -5,6 +5,7 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.1.30" />
     <ProjectReference Include="..\..\src\Ben.Demystifier\Ben.Demystifier.csproj" />
     <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
   </ItemGroup>
