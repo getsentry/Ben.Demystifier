@@ -13,7 +13,7 @@ namespace System.Diagnostics
     /// <summary>
     /// Extension methods to Demystify exveption stack traces
     /// </summary>
-    public static class ExceptionExtensions
+    internal static class ExceptionExtensions
     {
         private static readonly FieldInfo? stackTraceString = typeof(Exception).GetField("_stackTraceString", BindingFlags.Instance | BindingFlags.NonPublic);
 
