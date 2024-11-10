@@ -15,7 +15,9 @@ namespace System.Diagnostics.Internal
     // Adapted from https://github.com/aspnet/Common/blob/dev/shared/Microsoft.Extensions.StackTrace.Sources/StackFrame/PortablePdbReader.cs
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
-#endif
+#endif 
+    // Allow direct file system usage
+#pragma warning disable SN0001
     internal class PortablePdbReader : IDisposable
     {
         private readonly Dictionary<string, MetadataReaderProvider> _cache =
@@ -145,4 +147,5 @@ namespace System.Diagnostics.Internal
             _cache.Clear();
         }
     }
+#pragma warning restore SN0001
 }
