@@ -6,11 +6,15 @@ using System.Collections.Generic;
 using System.Collections.Generic.Enumerable;
 using System.IO;
 using System.Text;
+using Ben.Demystifier;
 
 namespace System.Diagnostics
 {
     internal partial class EnhancedStackTrace : StackTrace, IEnumerable<EnhancedStackFrame>
     {
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         public static EnhancedStackTrace Current() => new EnhancedStackTrace(new StackTrace(1 /* skip this one frame */, true));
 
         private readonly List<EnhancedStackFrame> _frames;
@@ -26,6 +30,9 @@ namespace System.Diagnostics
         // Exceptions:
         //   T:System.ArgumentNullException:
         //     The parameter e is null.
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         public EnhancedStackTrace(Exception e)
         {
             if (e == null)
@@ -36,7 +43,9 @@ namespace System.Diagnostics
             _frames = GetFrames(e);
         }
 
-
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         public EnhancedStackTrace(StackTrace stackTrace)
         {
             if (stackTrace == null)

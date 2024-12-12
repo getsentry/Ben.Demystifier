@@ -24,7 +24,7 @@ namespace System.Diagnostics.Internal
             new Dictionary<string, MetadataReaderProvider>(StringComparer.Ordinal);
 
 #if NET6_0_OR_GREATER
-        [UnconditionalSuppressMessage("SingleFile", "IL3000:Avoid accessing Assembly file path when publishing as a single file", Justification = Constants.SuppressionResurfaced)]
+        [UnconditionalSuppressMessage("SingleFile", "IL3000: Avoid accessing Assembly file path", Justification = Constants.SingleFileFallback)]
 #endif
         public void PopulateStackFrame(StackFrame frameInfo, MethodBase method, int IlOffset, out string fileName, out int row, out int column)
         {

@@ -6,7 +6,7 @@ using System.Collections.Generic.Enumerable;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text;
-using Ben.Demystifier;
+using Constants = Ben.Demystifier.Constants;
 
 namespace System.Diagnostics
 {
@@ -23,9 +23,9 @@ namespace System.Diagnostics
         /// <summary>
         /// Demystifies the given <paramref name="exception"/> and tracks the original stack traces for the whole exception tree.
         /// </summary>
-        #if NET6_0_OR_GREATER
-        [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = Constants.SuppressionResurfaced)]
-        #endif
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         public static T Demystify<T>(this T exception) where T : Exception
         {
             try
