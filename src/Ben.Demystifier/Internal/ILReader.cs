@@ -5,9 +5,6 @@ using Ben.Demystifier;
 
 namespace System.Diagnostics.Internal
 {
-#if NET6_0_OR_GREATER
-    [RequiresUnreferencedCode(Constants.TrimWarning)]
-#endif
     internal class ILReader
     {
         private static OpCode[] singleByteOpCode;
@@ -16,13 +13,15 @@ namespace System.Diagnostics.Internal
         private readonly byte[] _cil;
         private int ptr;
 
-
         public ILReader(byte[] cil) => _cil = cil;
 
         public OpCode OpCode { get; private set; }
         public int MetadataToken { get; private set; }
         public MemberInfo? Operand { get; private set; }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         public bool Read(MethodBase methodInfo)
         {
             if (ptr < _cil.Length)
@@ -43,6 +42,9 @@ namespace System.Diagnostics.Internal
                 return doubleByteOpCode[ReadByte()];
         }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         MemberInfo? ReadOperand(OpCode code, MethodBase methodInfo)
         {
             MetadataToken = 0;

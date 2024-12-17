@@ -27,13 +27,13 @@ namespace System.Diagnostics
         public override string ToString() => Append(new StringBuilder()).ToString();
 
 #if NET6_0_OR_GREATER
-        [UnconditionalSuppressMessage("SingleFile", "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file", Justification = Constants.SuppressionResurfaced)]
+        [UnconditionalSuppressMessage("SingleFile", "IL3002: calling members marked with 'RequiresAssemblyFilesAttribute'", Justification = Constants.SingleFileFallback)]
 #endif
         public StringBuilder Append(StringBuilder sb)
         {
             if (ResolvedType.Assembly.ManifestModule.Name == "FSharp.Core.dll" && ResolvedType.Name == "Unit")
                 return sb;
-            
+
             if (!string.IsNullOrEmpty(Prefix))
             {
                 sb.Append(Prefix)
@@ -62,7 +62,7 @@ namespace System.Diagnostics
             return sb;
         }
 
-        protected virtual void AppendTypeName(StringBuilder sb) 
+        protected virtual void AppendTypeName(StringBuilder sb)
         {
             sb.AppendTypeDisplayName(ResolvedType, fullName: false, includeGenericParameterNames: true);
         }
