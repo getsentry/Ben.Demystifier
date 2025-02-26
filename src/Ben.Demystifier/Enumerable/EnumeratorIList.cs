@@ -3,7 +3,7 @@
 
 namespace System.Collections.Generic.Enumerable
 {
-    internal struct EnumeratorIList<T> : IEnumerator<T>
+    public struct EnumeratorIList<T> : IEnumerator<T>
     {
         private readonly IList<T> _list;
         private int _index;

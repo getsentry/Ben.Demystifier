@@ -4,13 +4,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Generic.Enumerable;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using Ben.Demystifier;
 
 namespace System.Diagnostics
 {
-    internal partial class EnhancedStackTrace : StackTrace, IEnumerable<EnhancedStackFrame>
+    public partial class EnhancedStackTrace : StackTrace, IEnumerable<EnhancedStackFrame>
     {
 #if NET6_0_OR_GREATER
         [RequiresUnreferencedCode(Constants.TrimWarning)]

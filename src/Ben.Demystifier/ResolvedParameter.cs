@@ -13,7 +13,7 @@ namespace System.Diagnostics
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
 #endif
-    internal class ResolvedParameter
+    public class ResolvedParameter
     {
         public string? Name { get; set; }
 

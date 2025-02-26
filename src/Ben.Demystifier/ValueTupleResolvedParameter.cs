@@ -12,7 +12,7 @@ namespace System.Diagnostics
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
 #endif
-    internal class ValueTupleResolvedParameter : ResolvedParameter
+    public class ValueTupleResolvedParameter : ResolvedParameter
     {
         public IList<string?> TupleNames { get; }
 

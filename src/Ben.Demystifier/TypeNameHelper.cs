@@ -9,7 +9,7 @@ using Ben.Demystifier;
 namespace System.Diagnostics
 {
     // Adapted from https://github.com/aspnet/Common/blob/dev/shared/Microsoft.Extensions.TypeNameHelper.Sources/TypeNameHelper.cs
-    internal static class TypeNameHelper
+    public static class TypeNameHelper
     {
         public static readonly Dictionary<Type, string> BuiltInTypeNames = new Dictionary<Type, string>
         {

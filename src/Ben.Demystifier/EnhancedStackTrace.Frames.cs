@@ -19,12 +19,14 @@ using Ben.Demystifier;
 
 namespace System.Diagnostics
 {
-    internal partial class EnhancedStackTrace
+    public partial class EnhancedStackTrace
     {
         private static readonly Type? StackTraceHiddenAttributeType = Type.GetType("System.Diagnostics.StackTraceHiddenAttribute", false);
         private static readonly Type? AsyncIteratorStateMachineAttributeType = Type.GetType("System.Runtime.CompilerServices.AsyncIteratorStateMachineAttribute", false);
 
+#if NET6_0_OR_GREATER
         [UnconditionalSuppressMessage("Trimming", "IL2026: RequiresUnreferencedCode", Justification = Constants.AvoidAtRuntime)]
+#endif
         static EnhancedStackTrace()
         {
             if (AsyncIteratorStateMachineAttributeType != null) return;
