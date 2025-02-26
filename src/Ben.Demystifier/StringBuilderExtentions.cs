@@ -11,7 +11,7 @@ namespace System.Diagnostics
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
 #endif
-    public static class StringBuilderExtentions
+    internal static class StringBuilderExtentions
     {
         public static StringBuilder AppendDemystified(this StringBuilder builder, Exception exception)
         {

@@ -15,7 +15,7 @@ namespace System.Diagnostics.Internal
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
 #endif
-    public static class ReflectionHelper
+    internal static class ReflectionHelper
     {
 #if NET45
         private static PropertyInfo? transformerNamesLazyPropertyInfo;

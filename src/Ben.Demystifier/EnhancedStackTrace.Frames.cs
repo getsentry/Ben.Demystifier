@@ -19,6 +19,9 @@ using Ben.Demystifier;
 
 namespace System.Diagnostics
 {
+#if NET6_0_OR_GREATER
+    [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
     public partial class EnhancedStackTrace
     {
         private static readonly Type? StackTraceHiddenAttributeType = Type.GetType("System.Diagnostics.StackTraceHiddenAttribute", false);

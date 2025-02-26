@@ -11,7 +11,7 @@ using Ben.Demystifier;
 
 namespace System.Diagnostics
 {
-    public partial class EnhancedStackTrace : StackTrace, IEnumerable<EnhancedStackFrame>
+    internal partial class EnhancedStackTrace : StackTrace, IEnumerable<EnhancedStackFrame>
     {
 #if NET6_0_OR_GREATER
         [RequiresUnreferencedCode(Constants.TrimWarning)]

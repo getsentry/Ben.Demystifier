@@ -10,7 +10,7 @@ namespace System.Diagnostics
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
 #endif
-    public class EnhancedStackFrame : StackFrame
+    internal class EnhancedStackFrame : StackFrame
     {
         private readonly string? _fileName;
         private readonly int _lineNumber;
