@@ -25,7 +25,7 @@ jobs:
       - name: Install .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-            dotnet-version: |
+            dotnet-version: |                
                 9.0.100
 
       - name: Get .NET information
@@ -36,4 +36,10 @@ jobs:
       
       - name: "Test"
         run: dotnet test -c ${{ matrix.config }} -l "trx;LogFilePrefix=testresults_${{ runner.os }}_${{ matrix.config }}"
-        
+
+      - name: "Upload Test Results"
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+            name: test-results
+            path: '**/testresults_*.trx'        
