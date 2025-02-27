@@ -174,6 +174,6 @@ Which is far less helpful, and close to jibberish in places
 
 To run benchmarks from the repository root:
 ```
-dotnet run -p .\test\Ben.Demystifier.Benchmarks\ -c Release -f net8.0 All
+dotnet run -p .\test\Ben.Demystifier.Benchmarks\ -c Release -f net6.0 All
 ```
 <sub>Note: we're only kicking off via `net8.0`, benchmarks will run for all configured platforms like `net462`.</sub>
