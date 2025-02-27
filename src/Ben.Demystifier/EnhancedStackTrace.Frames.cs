@@ -643,7 +643,7 @@ namespace System.Diagnostics
             {
                 var customAttribs = parameter.GetCustomAttributes(inherit: false);
 
-#if NET45
+#if NETFRAMEWORK
                 var tupleNameAttribute = customAttribs.OfType<Attribute>().FirstOrDefault(a => a.IsTupleElementNameAttribute());
 
                 var tupleNames = tupleNameAttribute?.GetTransformerNames();

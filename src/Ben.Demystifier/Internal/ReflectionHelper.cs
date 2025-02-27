@@ -17,7 +17,7 @@ namespace System.Diagnostics.Internal
 #endif
     internal static class ReflectionHelper
     {
-#if NET45
+#if NETFRAMEWORK
         private static PropertyInfo? transformerNamesLazyPropertyInfo;
 #endif
 
@@ -29,7 +29,7 @@ namespace System.Diagnostics.Internal
             return type.Namespace == "System" && type.Name.Contains("ValueTuple`");
         }
 
-#if NET45
+#if NETFRAMEWORK
         /// <summary>
         /// Returns true if the given <paramref name="attribute"/> is of type <code>TupleElementNameAttribute</code>.
         /// </summary>
