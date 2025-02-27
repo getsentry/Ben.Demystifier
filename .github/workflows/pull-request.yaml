@@ -9,6 +9,8 @@ jobs:
   build:
     name: "Build for PR"
     runs-on: ${{ matrix.os }}
+    env:
+      DOTNET_NOLOGO: true
     strategy:
       fail-fast: false
       matrix:
@@ -24,7 +26,6 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
             dotnet-version: |
-                6.0.417
                 9.0.100
 
       - name: Get .NET information

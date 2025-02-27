@@ -1,6 +1,6 @@
 ﻿<Project>
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>13</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <!-- We need to support old stuff. Applications should definitely address these advisory warnings though. -->
       <NoWarn>$(NoWarn);NU1902;NU1903</NoWarn>
