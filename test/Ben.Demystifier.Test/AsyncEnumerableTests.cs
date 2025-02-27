@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Ben.Demystifier.Test
 {
-#if NET8_0_OR_GREATER
     public class AsyncEnumerableTests
     {
         [Fact]
@@ -62,5 +61,4 @@ namespace Ben.Demystifier.Test
             throw new InvalidOperationException();
         }
     }
-#endif
 }
