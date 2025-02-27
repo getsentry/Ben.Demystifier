@@ -35,5 +35,5 @@ jobs:
         run: dotnet build -c ${{ matrix.config }}
       
       - name: "Test"
-        run: dotnet test -c ${{ matrix.config }}
+        run: dotnet test -c ${{ matrix.config }} -l "trx;LogFilePrefix=testresults_${{ runner.os }}_${{ matrix.config }}"
         
