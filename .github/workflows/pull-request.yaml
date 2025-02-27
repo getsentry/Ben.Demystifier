@@ -9,8 +9,6 @@ jobs:
   build:
     name: "Build for PR"
     runs-on: ${{ matrix.os }}
-    env:
-      DOTNET_NOLOGO: true
     strategy:
       fail-fast: false
       matrix:
