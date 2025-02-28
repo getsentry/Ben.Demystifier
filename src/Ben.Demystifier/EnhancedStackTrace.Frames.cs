@@ -24,7 +24,9 @@ namespace System.Diagnostics
         private static readonly Type? StackTraceHiddenAttributeType = Type.GetType("System.Diagnostics.StackTraceHiddenAttribute", false);
         private static readonly Type? AsyncIteratorStateMachineAttributeType = Type.GetType("System.Runtime.CompilerServices.AsyncIteratorStateMachineAttribute", false);
 
+#if NET6_0_OR_GREATER
         [UnconditionalSuppressMessage("Trimming", "IL2026: RequiresUnreferencedCode", Justification = Constants.AvoidAtRuntime)]
+#endif
         static EnhancedStackTrace()
         {
             if (AsyncIteratorStateMachineAttributeType != null) return;
@@ -638,7 +640,7 @@ namespace System.Diagnostics
             {
                 var customAttribs = parameter.GetCustomAttributes(inherit: false);
 
-#if NET45
+#if NETFRAMEWORK
                 var tupleNameAttribute = customAttribs.OfType<Attribute>().FirstOrDefault(a => a.IsTupleElementNameAttribute());
 
                 var tupleNames = tupleNameAttribute?.GetTransformerNames();

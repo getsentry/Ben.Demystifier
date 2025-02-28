@@ -6,10 +6,8 @@ using BenchmarkDotNet.Jobs;
 
 namespace Ben.Demystifier.Benchmarks
 {
-    [SimpleJob(RuntimeMoniker.Net48)]
-    [SimpleJob(RuntimeMoniker.NetCoreApp21)]
-    [SimpleJob(RuntimeMoniker.NetCoreApp31)]
-    [SimpleJob(RuntimeMoniker.NetCoreApp50)]
+    [SimpleJob(RuntimeMoniker.HostProcess)]
+    [SimpleJob(RuntimeMoniker.Net462)]
     [Config(typeof(Config))]
     public class ExceptionTests
     {
