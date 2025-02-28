@@ -22,11 +22,14 @@ namespace System.Diagnostics
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
 #endif
-    internal partial class EnhancedStackTrace
+    public partial class EnhancedStackTrace
     {
         private static readonly Type? StackTraceHiddenAttributeType = Type.GetType("System.Diagnostics.StackTraceHiddenAttribute", false);
         private static readonly Type? AsyncIteratorStateMachineAttributeType = Type.GetType("System.Runtime.CompilerServices.AsyncIteratorStateMachineAttribute", false);
 
+#if NET6_0_OR_GREATER
+        [UnconditionalSuppressMessage("Trimming", "IL2026: RequiresUnreferencedCode", Justification = Constants.AvoidAtRuntime)]
+#endif
         static EnhancedStackTrace()
         {
             if (AsyncIteratorStateMachineAttributeType != null) return;
@@ -35,15 +38,18 @@ namespace System.Diagnostics
             try
             {
                 mba = Assembly.Load("Microsoft.Bcl.AsyncInterfaces");
+                AsyncIteratorStateMachineAttributeType = mba.GetType("System.Runtime.CompilerServices.AsyncIteratorStateMachineAttribute", false);
             }
             catch
             {
                 return;
             }
 
-            AsyncIteratorStateMachineAttributeType = mba.GetType("System.Runtime.CompilerServices.AsyncIteratorStateMachineAttribute", false);
         }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         private static List<EnhancedStackFrame> GetFrames(Exception exception)
         {
             if (exception == null)
@@ -57,6 +63,9 @@ namespace System.Diagnostics
             return GetFrames(stackTrace);
         }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         public static List<EnhancedStackFrame> GetFrames(StackTrace stackTrace)
         {
             var frames = new List<EnhancedStackFrame>();
@@ -124,6 +133,9 @@ namespace System.Diagnostics
             return frames;
         }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         public static ResolvedMethod GetMethodDisplayString(MethodBase originMethod)
         {
             var method = originMethod;
@@ -300,6 +312,9 @@ namespace System.Diagnostics
             return false;
         }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         private static bool TryResolveGeneratedName(ref MethodBase method, out Type? type, out string methodName, out string? subMethodName, out GeneratedNameKind kind, out int? ordinal)
         {
             kind = GeneratedNameKind.None;
@@ -386,6 +401,9 @@ namespace System.Diagnostics
             return false;
         }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         private static bool TryResolveSourceMethod(IEnumerable<MethodBase> candidateMethods, GeneratedNameKind kind, string? matchHint, ref MethodBase method, ref Type? type, out int? ordinal)
         {
             ordinal = null;
@@ -455,6 +473,9 @@ namespace System.Diagnostics
             return false;
         }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         private static void GetOrdinal(MethodBase method, ref int? ordinal)
         {
             var lamdaStart = method.Name.IndexOf((char)GeneratedNameKind.LambdaMethod + "__") + 3;
@@ -610,6 +631,9 @@ namespace System.Diagnostics
             return string.Empty;
         }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         private static ResolvedParameter GetParameter(ParameterInfo parameter)
         {
             var prefix = GetPrefix(parameter);
@@ -619,7 +643,7 @@ namespace System.Diagnostics
             {
                 var customAttribs = parameter.GetCustomAttributes(inherit: false);
 
-#if NET45
+#if NETFRAMEWORK
                 var tupleNameAttribute = customAttribs.OfType<Attribute>().FirstOrDefault(a => a.IsTupleElementNameAttribute());
 
                 var tupleNames = tupleNameAttribute?.GetTransformerNames();
@@ -648,6 +672,9 @@ namespace System.Diagnostics
             };
         }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         private static ResolvedParameter GetValueTupleParameter(IList<string?> tupleNames, string prefix, string? name, Type parameterType)
         {
             return new ValueTupleResolvedParameter(parameterType, tupleNames)
@@ -867,6 +894,9 @@ namespace System.Diagnostics
             return false;
         }
 
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
         // https://github.com/dotnet/runtime/blob/c985bdcec2a9190e733bcada413a193d5ff60c0d/src/libraries/System.Private.CoreLib/src/System/Diagnostics/StackTrace.cs#L375-L430
         private static bool TryResolveStateMachineMethod(ref MethodBase method, out Type declaringType)
         {

@@ -12,7 +12,7 @@ namespace System.Diagnostics
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
 #endif
-    internal static class TypeNameHelper
+    public static class TypeNameHelper
     {
         public static readonly Dictionary<Type, string> BuiltInTypeNames = new Dictionary<Type, string>
         {
@@ -79,7 +79,7 @@ namespace System.Diagnostics
         }
 
 #if NET6_0_OR_GREATER
-        [UnconditionalSuppressMessage("SingleFile", "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file", Justification = Constants.SuppressionResurfaced)]
+        [UnconditionalSuppressMessage("SingleFile", "IL3002: calling members marked with 'RequiresAssemblyFilesAttribute'", Justification = Constants.SingleFileFallback)]
 #endif
         private static void ProcessType(StringBuilder builder, Type type, DisplayNameOptions options)
         {
@@ -154,7 +154,7 @@ namespace System.Diagnostics
         }
 
 #if NET6_0_OR_GREATER
-        [UnconditionalSuppressMessage("SingleFile", "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file", Justification = Constants.SuppressionResurfaced)]
+        [UnconditionalSuppressMessage("SingleFile", "IL3002: calling members marked with 'RequiresAssemblyFilesAttribute'", Justification = Constants.SingleFileFallback)]
 #endif
         private static void ProcessGenericType(StringBuilder builder, Type type, Type[] genericArguments, int length, DisplayNameOptions options)
         {

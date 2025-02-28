@@ -15,14 +15,16 @@ namespace System.Diagnostics.Internal
     // Adapted from https://github.com/aspnet/Common/blob/dev/shared/Microsoft.Extensions.StackTrace.Sources/StackFrame/PortablePdbReader.cs
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
-#endif
+#endif 
+    // Allow direct file system usage
+#pragma warning disable SN0001
     internal class PortablePdbReader : IDisposable
     {
         private readonly Dictionary<string, MetadataReaderProvider> _cache =
             new Dictionary<string, MetadataReaderProvider>(StringComparer.Ordinal);
 
 #if NET6_0_OR_GREATER
-        [UnconditionalSuppressMessage("SingleFile", "IL3000:Avoid accessing Assembly file path when publishing as a single file", Justification = Constants.SuppressionResurfaced)]
+        [UnconditionalSuppressMessage("SingleFile", "IL3000: Avoid accessing Assembly file path", Justification = Constants.SingleFileFallback)]
 #endif
         public void PopulateStackFrame(StackFrame frameInfo, MethodBase method, int IlOffset, out string fileName, out int row, out int column)
         {
@@ -145,4 +147,5 @@ namespace System.Diagnostics.Internal
             _cache.Clear();
         }
     }
+#pragma warning restore SN0001
 }
